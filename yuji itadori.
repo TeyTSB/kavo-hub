@@ -1,0 +1,524 @@
+        local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Function to handle the sequence of replacement animations
+local function playAnimationSequence()
+    -- First animation
+    local firstAnim = Instance.new("Animation")
+    firstAnim.AnimationId = "rbxassetid://18903642853"
+    local firstTrack = humanoid:LoadAnimation(firstAnim)
+    firstTrack:Play()
+    firstTrack.TimePosition = 0 -- Start at 0 seconds
+    firstTrack:AdjustSpeed(1)  -- Set speed to normal
+
+    -- Stop after 1.2 seconds
+    task.delay(1.2, function()
+        firstTrack:Stop()
+    end)
+
+    -- Wait for 1.2 seconds before starting the second animation
+    wait(1.2)
+
+    -- Second animation
+    local secondAnim = Instance.new("Animation")
+    secondAnim.AnimationId = "rbxassetid://13603396939"
+    local secondTrack = humanoid:LoadAnimation(secondAnim)
+    secondTrack:Play()
+    secondTrack.TimePosition = 2 -- Start at 2 seconds
+    secondTrack:AdjustSpeed(0.54)  -- Set speed to 0.54
+
+    -- Stop after 0.8 seconds
+    task.delay(0.8, function()
+        secondTrack:Stop()
+    end)
+
+    -- Wait for 0.8 seconds before starting the third animation
+    wait(0.8)
+
+    -- Third animation
+    local thirdAnim = Instance.new("Animation")
+    thirdAnim.AnimationId = "rbxassetid://14057231976"
+    local thirdTrack = humanoid:LoadAnimation(thirdAnim)
+    thirdTrack:Play()
+    thirdTrack.TimePosition = 1 -- Start at 1 second
+    thirdTrack:AdjustSpeed(0.7)  -- Set speed to normal
+
+    -- Stop after 1.9 seconds
+    task.delay(1.9, function()
+        thirdTrack:Stop()
+    end)
+end
+
+-- Detect when any animation is played on the humanoid
+humanoid.AnimationPlayed:Connect(function(animationTrack)
+    -- Check if the played animation has the ID "15955393872"
+    if animationTrack.Animation.AnimationId == "rbxassetid://15955393872" then
+        -- Cancel the current animation
+        animationTrack:Stop()
+
+        -- Trigger the animation sequence
+        playAnimationSequence()
+    end
+end)
+
+
+-- KOKUSEN!!
+
+
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local newAnimationId = "18896127525"
+local animationIds = {
+    "10468665991"
+}
+
+local function stopAnimations()
+    for _, track in ipairs(humanoid:GetPlayingAnimationTracks()) do
+        if table.find(animationIds, track.Animation.AnimationId:match("%d+$")) then
+            track:Stop()
+        end
+    end
+end
+
+local function playNewAnimation()
+    local animation = Instance.new("Animation")
+    animation.AnimationId = "rbxassetid://" .. newAnimationId
+
+    local animationTrack = humanoid:LoadAnimation(animation)
+    animationTrack:Play()
+    animationTrack.TimePosition = 0.8 -- start anim
+    animationTrack:AdjustSpeed(1) -- speed setter
+
+    -- stopping anim
+    task.delay(55, function()
+        animationTrack:Stop()
+    end)
+end
+
+local function playVFX()
+    -- Wait 0.4 seconds before showing VFX
+    task.wait(0.66)
+    
+-- Assuming there are 5 Attachments inside the FinalImpact folder
+local attachments = game.ReplicatedStorage.Resources.KJEffects.KJWallCombo["FinalImpactHUGEignore"]:GetChildren()
+
+-- Loop through all Attachments in the FinalImpact folder
+for _, attachment in ipairs(attachments) do
+    if attachment:IsA("Attachment") then
+        -- Clone each attachment
+        local vfx = attachment:Clone()
+        -- Parent it to the player's character's Right Arm
+        vfx.Parent = game.Players.LocalPlayer.Character["Right Arm"]
+
+        -- Loop through all children of the attachment to find ParticleEmitters
+        for _, child in ipairs(vfx:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                -- Emit particles and change the color
+                child:Emit(1)
+                child.Color = ColorSequence.new(Color3.fromRGB(255, 51, 51))
+                end
+            end
+        end
+    end
+end
+
+local function onAnimationTrackStarted(track)
+    if table.find(animationIds, track.Animation.AnimationId:match("%d+$")) then
+        stopAnimations()
+        playNewAnimation()
+        playVFX()
+    end
+end
+
+-- Connect the event to play the animation
+humanoid.AnimationPlayed:Connect(onAnimationTrackStarted)
+
+
+
+-- dIVEGENTS BARRAGINGS!!
+
+
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local newAnimationId = "12460977270"
+local animationIds = {
+    "10466974800"
+}
+
+
+local function stopAnimations()
+    for _, track in ipairs(humanoid:GetPlayingAnimationTracks()) do
+        if table.find(animationIds, track.Animation.AnimationId:match("%d+$")) then
+            track:Stop()
+        end
+    end
+end
+
+
+local function playNewAnimation()
+    local animation = Instance.new("Animation")
+    animation.AnimationId = "rbxassetid://" .. newAnimationId
+
+    local animationTrack = humanoid:LoadAnimation(animation)
+    animationTrack:Play()
+    animationTrack.TimePosition = 0 -- start anim
+    animationTrack:AdjustSpeed(0.8) -- speed setter
+
+    -- stopping anim
+    task.delay(1.6, function()
+        animationTrack:Stop()
+    end)
+end
+
+
+local function onAnimationTrackStarted(track)
+    if table.find(animationIds, track.Animation.AnimationId:match("%d+$")) then
+        stopAnimations() 
+        playNewAnimation() 
+    end
+end
+
+humanoid.AnimationPlayed:Connect(onAnimationTrackStarted)
+
+-- 3rd
+
+
+
+
+
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local newAnimationId = "18440406788"
+local animationIds = {
+    "10471336737"
+}
+
+local function stopAnimations()
+    for _, track in ipairs(humanoid:GetPlayingAnimationTracks()) do
+        if table.find(animationIds, track.Animation.AnimationId:match("%d+$")) then
+            track:Stop()
+        end
+    end
+end
+
+local function playNewAnimation()
+    local animation = Instance.new("Animation")
+    animation.AnimationId = "rbxassetid://" .. newAnimationId
+
+    local animationTrack = humanoid:LoadAnimation(animation)
+    animationTrack:Play()
+    animationTrack.TimePosition = 1 -- Start at 1 second
+    animationTrack:AdjustSpeed(1.2) -- Speed set to 1.2
+
+    -- Stop the animation after 1 second
+    task.delay(1, function()
+        animationTrack:Stop()
+    end)
+end
+
+local function playVFX()
+    -- Wait 0.4 seconds before showing VFX
+    task.wait(0.4)
+
+    -- Function to handle VFX with a specific color
+    local function createVFX(color)
+        -- Assuming there are 5 Attachments inside the FinalImpact folder
+        local attachments = game.ReplicatedStorage.Resources.KJEffects.KJWallCombo["FinalImpact"]:GetChildren()
+
+        -- Loop through all Attachments in the FinalImpact folder
+        for _, attachment in ipairs(attachments) do
+            if attachment:IsA("Attachment") then
+                -- Clone each attachment
+                local vfx = attachment:Clone()
+                -- Parent it to the player's character's Right Hand (R15)
+                vfx.Parent = game.Players.LocalPlayer.Character:FindFirstChild("RightHand") or game.Players.LocalPlayer.Character:FindFirstChild("Right Arm") -- Handles both R6 and R15
+
+                -- Loop through all children of the attachment to find ParticleEmitters
+                for _, child in ipairs(vfx:GetChildren()) do
+                    if child:IsA("ParticleEmitter") then
+                        -- Emit particles and change the color
+                        child:Emit(1)
+                        child.Color = ColorSequence.new(color)
+                    end
+                end
+            end
+        end
+    end
+
+    -- Create VFX with the first color (RGB: 0, 0, 204)
+    createVFX(Color3.fromRGB(0, 0, 204))
+
+    -- Create VFX with the second color (RGB: 153, 0, 0)
+    createVFX(Color3.fromRGB(153, 0, 0))
+end
+
+
+local function onAnimationTrackStarted(track)
+    if table.find(animationIds, track.Animation.AnimationId:match("%d+$")) then
+        stopAnimations()
+        playNewAnimation()
+        playVFX()
+    end
+end
+
+-- Connect the event to play the animation
+humanoid.AnimationPlayed:Connect(onAnimationTrackStarted)
+
+
+
+-- 4th
+
+
+
+
+
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local newAnimationId = "18464372850"
+local animationIds = {
+    "12510170988"
+}
+
+
+local function stopAnimations()
+    for _, track in ipairs(humanoid:GetPlayingAnimationTracks()) do
+        if table.find(animationIds, track.Animation.AnimationId:match("%d+$")) then
+            track:Stop()
+        end
+    end
+end
+
+
+local function playNewAnimation()
+    local animation = Instance.new("Animation")
+    animation.AnimationId = "rbxassetid://" .. newAnimationId
+
+    local animationTrack = humanoid:LoadAnimation(animation)
+    animationTrack:Play()
+    animationTrack.TimePosition = 2 -- start anim
+    animationTrack:AdjustSpeed(1) -- speed setter
+
+    -- stopping anim
+    task.delay(1, function()
+        animationTrack:Stop()
+    end)
+end
+
+
+local function onAnimationTrackStarted(track)
+    if table.find(animationIds, track.Animation.AnimationId:match("%d+$")) then
+        stopAnimations() 
+        playNewAnimation() 
+    end
+end
+
+humanoid.AnimationPlayed:Connect(onAnimationTrackStarted)
+
+
+
+
+
+
+
+--Move & Ultimate Names
+
+local player = game.Players.LocalPlayer
+
+local playerGui = player.PlayerGui
+
+local hotbar = playerGui:FindFirstChild("Hotbar")
+
+local backpack = hotbar:FindFirstChild("Backpack")
+
+local hotbarFrame = backpack:FindFirstChild("Hotbar")
+
+local baseButton = hotbarFrame:FindFirstChild("1").Base
+
+local ToolName = baseButton.ToolName
+
+
+ToolName.Text = "Black Flash"
+
+
+local player = game.Players.LocalPlayer
+
+local playerGui = player.PlayerGui
+
+local hotbar = playerGui:FindFirstChild("Hotbar")
+
+local backpack = hotbar:FindFirstChild("Backpack")
+
+local hotbarFrame = backpack:FindFirstChild("Hotbar")
+
+local baseButton = hotbarFrame:FindFirstChild("2").Base
+
+local ToolName = baseButton.ToolName
+
+
+ToolName.Text = "Divergent Barrages"
+
+
+local player = game.Players.LocalPlayer
+
+local playerGui = player.PlayerGui
+
+local hotbar = playerGui:FindFirstChild("Hotbar")
+
+local backpack = hotbar:FindFirstChild("Backpack")
+
+local hotbarFrame = backpack:FindFirstChild("Hotbar")
+
+local baseButton = hotbarFrame:FindFirstChild("3").Base
+
+local ToolName = baseButton.ToolName
+
+
+ToolName.Text = "Flash Slap"
+
+
+local player = game.Players.LocalPlayer
+
+local playerGui = player.PlayerGui
+
+local hotbar = playerGui:FindFirstChild("Hotbar")
+
+local backpack = hotbar:FindFirstChild("Backpack")
+
+local hotbarFrame = backpack:FindFirstChild("Hotbar")
+
+local baseButton = hotbarFrame:FindFirstChild("4").Base
+
+local ToolName = baseButton.ToolName
+
+
+ToolName.Text = "Downkick"
+
+
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+
+local playerGui = player:WaitForChild("PlayerGui")
+
+
+local function findGuiAndSetText()
+
+    local screenGui = playerGui:FindFirstChild("ScreenGui")
+
+    if screenGui then
+
+        local magicHealthFrame = screenGui:FindFirstChild("MagicHealth")
+
+        if magicHealthFrame then
+
+            local textLabel = magicHealthFrame:FindFirstChild("TextLabel")
+
+            if textLabel then
+
+                textLabel.Text = "AWAKENED CURSED KING"
+
+            end
+
+        end
+
+    end
+
+end
+
+
+playerGui.DescendantAdded:Connect(findGuiAndSetText)
+
+findGuiAndSetText()
+
+-- NO VELOCITY
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+-- Function to handle BodyVelocity adjustment
+local function onBodyVelocityAdded(bodyVelocity)
+    if bodyVelocity:IsA("BodyVelocity") then
+        bodyVelocity.Velocity = Vector3.new(bodyVelocity.Velocity.X, 0, bodyVelocity.Velocity.Z)
+    end
+end
+
+-- Iterate over current character's descendants to adjust BodyVelocity
+local function adjustCharacterBodyVelocity(character)
+    for _, descendant in pairs(character:GetDescendants()) do
+        onBodyVelocityAdded(descendant)
+    end
+    character.DescendantAdded:Connect(onBodyVelocityAdded)
+end
+
+-- Handle when a new character is added (e.g., on respawn)
+player.CharacterAdded:Connect(function(newCharacter)
+    character = newCharacter
+    humanoidRootPart = newCharacter:WaitForChild("HumanoidRootPart")
+    adjustCharacterBodyVelocity(newCharacter)
+end)
+
+-- Initial setup for current character
+adjustCharacterBodyVelocity(character)
+
+-- ult bar
+
+
+
+
+
+
+
+
+
+local TweenService = game:GetService("TweenService")
+local player = game:GetService("Players").LocalPlayer
+local healthBar = player.PlayerGui.ScreenGui.MagicHealth.Health.Bar.Bar
+
+-- Starting color and target color
+local startColor = Color3.fromRGB(153, 0, 0)
+local endColor = Color3.fromRGB(0, 128, 255)
+
+-- Tween information (duration and easing style)
+local tweenInfo = TweenInfo.new(
+    2, -- Duration of the tween (change this value as needed)
+    Enum.EasingStyle.Linear, -- Easing style
+    Enum.EasingDirection.Out -- Easing direction
+)
+
+-- Function to create and play tween
+local function tweenColor(start, goal)
+    local tweenGoal = {ImageColor3 = goal}
+    local tween = TweenService:Create(healthBar, tweenInfo, tweenGoal)
+    tween:Play()
+    tween.Completed:Wait() -- Wait for the tween to finish before continuing
+end
+
+-- Tween back and forth loop
+while true do
+    -- Tween from startColor to endColor
+    tweenColor(startColor, endColor)
+    
+    -- Tween from endColor back to startColor
+    tweenColor(endColor, startColor)
+end
+
+-- wall combo
+
+
+
+    end
