@@ -1,0 +1,55 @@
+Section:NewToggle("Run", "ran", function(state)
+    local Players = game:GetService("Players")
+    local RunService = game:GetService("RunService")
+    local AnimationId = "18897115785"
+    local runSpeedMultiplier = 5 -- Adjust this value as needed
+
+    if state then
+        local player = Players.LocalPlayer
+        local Tool = Instance.new("Tool")
+        Tool.Name = "Run"
+        Tool.RequiresHandle = false
+        Tool.Parent = player.Backpack
+
+        local function onEquipped()
+            local character = player.Character or player.CharacterAdded:Wait()
+            local humanoid = character:WaitForChild("Humanoid")
+            local rootPart = character:WaitForChild("HumanoidRootPart")
+
+            local animator = humanoid:FindFirstChildOfClass("Animator") or Instance.new("Animator", humanoid)
+            local animation = Instance.new("Animation")
+            animation.AnimationId = "rbxassetid://" .. AnimationId
+            local animationTrack = animator:LoadAnimation(animation)
+            animationTrack:Play()
+
+            local originalWalkSpeed = humanoid.WalkSpeed
+            local runLoop
+
+            runLoop = RunService.Heartbeat:Connect(function()
+                humanoid.WalkSpeed = originalWalkSpeed * runSpeedMultiplier
+                rootPart.CFrame = rootPart.CFrame * CFrame.new(0, 0, -humanoid.WalkSpeed / 60)
+            end)
+
+            Tool.Unequipped:Connect(function()
+                if runLoop then
+                    runLoop:Disconnect()
+                    runLoop = nil
+                end
+                animationTrack:Stop()
+                humanoid.WalkSpeed = originalWalkSpeed -- Reset walk speed to original
+            end)
+        end
+
+        Tool.Equipped:Connect(onEquipped)
+    else
+        local player = Players.LocalPlayer
+        local backpack = player.Backpack
+        local tool = backpack:FindFirstChild("Run")
+        
+        if tool then
+            tool:Destroy()
+        end
+
+        print("Toggle Off")
+    end
+end)
