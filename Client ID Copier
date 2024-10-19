@@ -1,0 +1,47 @@
+local MessageBox = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/NotificationGUI/main/source.lua"))()
+
+MessageBox.Show({
+    Position = UDim2.new(0.5, 0, 0.5, 0),
+    Text = "Client ID copier",
+    Description = "Client ID Copier\nPress Yes\n \nDo you want to Copy your Client ID to the Clipboard?",
+    MessageBoxIcon = "Question",
+    MessageBoxButtons = "YesNo",
+    Result = function(res)
+        if res == "Yes" then
+            local success, clientId = pcall(function()
+                return game:GetService("RbxAnalyticsService"):GetClientId()
+            end)
+            
+            if success then
+                print("ClientId: " .. clientId)
+                setclipboard(clientId)  
+                game.StarterGui:SetCore("SendNotification", {
+                    Title = "Client ID Copied";
+                    Text = "ClientId: " .. clientId;
+                    Icon = "";
+                    Duration = 5;
+                })
+            else
+                warn("Failed to get ClientId: " .. tostring(clientId))
+                game.StarterGui:SetCore("SendNotification", {
+                    Title = "Failed to Copy Client ID";
+                    Text = "Could not retrieve Client ID.";
+                    Icon = "";
+                    Duration = 5;
+                })
+            end
+            
+            MessageBox.Show({
+                MessageBoxButtons = "OK",
+                Description = "Client ID copied to clipboard",
+                Text = "Client ID Copier"
+            })
+        elseif res == "No" then
+            MessageBox.Show({
+                MessageBoxButtons = "OK",
+                Description = "Failed to copy Client ID",
+                Text = "Client ID Copier"
+            })
+        end
+    end
+})
