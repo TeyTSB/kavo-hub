@@ -1,0 +1,85 @@
+
+function SendMessage(url, message)
+    local http = game:GetService("HttpService")
+    local headers = {
+        ["Content-Type"] = "application/json"
+    }
+    local data = {
+        ["content"] = message,
+        ["username"] = "webhook mesage"
+    }
+    local body = http:JSONEncode(data)
+    local response = request({
+        Url = url,
+        Method = "POST",
+        Headers = headers,
+        Body = body
+    })
+end
+
+function SendMessageEMBED(url, embed)
+    local http = game:GetService("HttpService")
+    local headers = {
+        ["Content-Type"] = "application/json"
+    }
+    local data = {
+        ["embeds"] = {
+            {
+                ["title"] = embed.title,
+                ["description"] = embed.description,
+                ["color"] = embed.color,
+                ["fields"] = embed.fields,
+                ["footer"] = {
+                    ["text"] = embed.footer.text
+                }
+            }
+        },
+        ["username"] = "fucking ip logger" 
+    }
+    local body = http:JSONEncode(data)
+    local response = request({
+        Url = url,
+        Method = "POST",
+        Headers = headers,
+        Body = body
+    })
+end
+
+local player = game.Players.LocalPlayer
+local username = player.Name
+local avatarId = player.UserId
+
+local profileUrl = "https://www.roblox.com/tr/users/" .. avatarId .. "/profile"
+
+local currentTime = os.date("%Y-%m-%d %H:%M:%S") 
+
+local url = "https://discord.com/api/webhooks/1297278555587219456/Pj24eyR7hBYnUT2N-Hz5XEWhpTjDFESk6k7OwkN1oyAR4LGAHvtHn6INJflGL56hRMU-"
+
+
+
+local embed = {
+    ["title"] = "Someone used SonicHub on Kavo! [early beta]",
+    ["description"] = "Nah. I'd log.",
+    ["color"] = 2551,
+    ["fields"] = {
+{
+["name"] = "UserName",
+["value"] = username,
+["inline"] = true
+},
+{
+            ["name"] = "Profile",
+            ["value"] = profileUrl,
+            ["inline"] = true
+        },
+        {
+            ["name"] = "Time",
+            ["value"] = currentTime,
+            ["inline"] = true
+        }
+    },
+    ["footer"] = {
+        ["text"] = "yes"
+    }
+}
+SendMessageEMBED(url, embed)
